@@ -1,0 +1,26 @@
+{
+  "name": "team-generator",
+  "version": "1.0.0",
+  "description": "Simple team generator project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gtgtcode/team-generator.git"
+  },
+  "author": "gtgtcode",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gtgtcode/team-generator/issues"
+  },
+  "homepage": "https://github.com/gtgtcode/team-generator#readme",
+  "devDependencies": {
+    "jest": "^29.4.3",
+    "tailwindcss": "^3.2.7"
+  },
+  "dependencies": {
+    "inquirer": "^8.2.4"
+  }
+}
