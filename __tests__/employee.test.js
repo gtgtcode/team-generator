@@ -1,4 +1,4 @@
-const Employee = require("../index");
+const { Employee } = require("../components/employee");
 
 test("Can get employee name", () => {
   const obj = new Employee("Joe", 14, "joeschmo@gmail.com");
