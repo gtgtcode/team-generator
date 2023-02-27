@@ -7,4 +7,4 @@ To use the application, run `node index.js` while the terminal is pointed to the
 
 ## Demo
 
-[![Demo Video Thumbnail](https://imgur.com/oKqdk48)](https://streamable.com/ilagkl)
+[![Demo Video Thumbnail](https://i.imgur.com/oKqdk48.jpeg)](https://streamable.com/ilagkl)
