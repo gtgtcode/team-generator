@@ -80,20 +80,20 @@ inquirer
     class="md:h-[400px] md:w-[400px] max-md:max-w-[200px] max-md:h-[200px] mx-auto rounded-lg shadow-2xl text-center"
   >
     <h2
-      class="md:text-xl text-md font-[Gloock] text-gray-500 text-center mt-5"
+      class="md:text-xl md:mb-4 mt-5 md:mt-10 text-md font-[Gloock] text-gray-500 text-center "
     >
       Manager
     </h2>
-    <h1 class="md:text-2xl text-lg font-[Gloock] text-center">${manager.name}</h1>
-    <h2 class="md:text-xl text-md font-[Gloock] text-gray-500 text-center">
+    <h1 class="md:text-2xl md:mb-4 text-lg font-[Gloock] text-center">${manager.name}</h1>
+    <h2 class="md:text-xl md:mb-4 text-md font-[Gloock] text-gray-500 text-center">
       #${manager.id}
     </h2>
-    <h2 class="md:text-xl text-md font-[Gloock] text-gray-500 text-center">
+    <h2 class="md:text-xl md:mb-4 text-md font-[Gloock] text-gray-500 text-center">
       Office #${manager.officeNumber}
     </h2>
     <a href="mailto:${manager.email}">
       <button
-        class="border p-4 mt-4 rounded-full hover:shadow-xl ease-linear"
+        class="md:mb-10 border p-4 mt-4 rounded-full hover:shadow-xl ease-linear"
       >
         <img
           src="../assets/images/icons8-mail-96.png"
@@ -118,6 +118,8 @@ inquirer
           },
           {
             name: "addEmployeePrompt",
+            type: "list",
+            choices: ["Yes", "No"],
             message: "Would you like to add an employee?",
           },
         ])
@@ -135,12 +137,12 @@ inquirer
           class="md:h-[400px] md:w-[400px] mt-10 max-md:max-w-[200px] max-md:h-[200px] mx-auto rounded-lg shadow-2xl text-center"
         >
           <h2
-            class="md:text-xl text-md font-[Gloock] text-gray-500 text-center mt-5"
+            class="md:text-xl md:mb-4 md:mt-10 text-md font-[Gloock] text-gray-500 text-center mt-5"
           >
             Engineer
           </h2>
-          <h1 class="md:text-2xl text-lg font-[Gloock] text-center">${engineer.name}</h1>
-          <h2 class="md:text-xl text-md font-[Gloock] text-gray-500 text-center">
+          <h1 class="md:text-2xl md:mb-4 text-lg font-[Gloock] text-center">${engineer.name}</h1>
+          <h2 class="md:text-xl md:mb-4 text-md font-[Gloock] text-gray-500 text-center">
             #${engineer.id}
           </h2>
           <a href="${engineer.github}">
@@ -165,9 +167,132 @@ inquirer
             </button>
           </a>
         </div>`;
-          data = htmlTempTop + components + htmlTempBottom;
-          fs.writeFile("src/index.html", data, (err) => {});
-          console.log(answers);
+          if (answers.addEmployeePrompt == "Yes") {
+            inquirer
+              .prompt([
+                {
+                  name: "getEmployeeName",
+                  message: "What is the employee's name?",
+                },
+                {
+                  name: "getEmployeeId",
+                  message: "What is the employee's ID?",
+                },
+                {
+                  name: "getEmployeeEmail",
+                  message: "What is the employee's email?",
+                },
+                {
+                  name: "addInternPrompt",
+                  type: "list",
+                  choices: ["Yes", "No"],
+                  message: "Would you like to add an intern?",
+                },
+              ])
+              .then((answers) => {
+                let employee = new Employee(
+                  answers.getEmployeeName,
+                  answers.getEmployeeId,
+                  answers.getEmployeeEmail
+                );
+                components =
+                  components +
+                  `<div
+                id="engineer-container"
+                class="md:h-[400px] md:w-[400px] mt-10 max-md:max-w-[200px] max-md:h-[200px] mx-auto rounded-lg shadow-2xl text-center"
+              >
+                <h2
+                  class="md:text-xl md:mb-4 md:mt-10 text-md font-[Gloock] text-gray-500 text-center mt-5"
+                >
+                  Employee
+                </h2>
+                <h1 class="md:text-2xl md:mb-4 text-lg font-[Gloock] text-center">${employee.name}</h1>
+                <h2 class="md:text-xl md:mb-4 text-md font-[Gloock] text-gray-500 text-center">
+                  #${employee.id}
+                </h2>
+                <a href="mailto:${employee.email}">
+                  <button
+                    class="border p-4 mt-4 rounded-full hover:shadow-xl ease-linear"
+                  >
+                    <img
+                      src="../assets/images/icons8-mail-96.png"
+                      alt="Mail Icon"
+                      width="30"
+                    />
+                  </button>
+                </a>
+              </div>`;
+                if (answers.addInternPrompt == "Yes") {
+                  inquirer
+                    .prompt([
+                      {
+                        name: "getInternName",
+                        message: "What is the intern's name?",
+                      },
+                      {
+                        name: "getInternId",
+                        message: "What is the intern's ID?",
+                      },
+                      {
+                        name: "getInternSchool",
+                        message: "What is the intern's school?",
+                      },
+                      {
+                        name: "getInternEmail",
+                        message: "What is the intern's email?",
+                      },
+                    ])
+                    .then((answers) => {
+                      let intern = new Intern(
+                        answers.getInternName,
+                        answers.getInternId,
+                        answers.getInternEmail,
+                        answers.getInternSchool
+                      );
+                      components =
+                        components +
+                        `<div
+                id="engineer-container"
+                class="md:h-[400px] md:w-[400px] mt-10 max-md:max-w-[200px] max-md:h-[200px] mx-auto rounded-lg shadow-2xl text-center"
+              >
+                <h2
+                  class="md:text-xl md:mb-4 md:mt-10 text-md font-[Gloock] text-gray-500 text-center mt-5"
+                >
+                  Intern
+                </h2>
+                <h1 class="md:text-2xl md:mb-4 text-lg font-[Gloock] text-center">${intern.name}</h1>
+                <h2 class="md:text-xl md:mb-4 text-md font-[Gloock] text-gray-500 text-center">
+                  #${intern.id}
+                </h2>
+                <h2 class="md:text-xl md:mb-4 text-md font-[Gloock] text-gray-500 text-center">
+                  ${intern.school}
+                </h2>
+                <a href="mailto:${intern.email}">
+                  <button
+                    class="border p-4 mt-4 rounded-full hover:shadow-xl ease-linear"
+                  >
+                    <img
+                      src="../assets/images/icons8-mail-96.png"
+                      alt="Mail Icon"
+                      width="30"
+                    />
+                  </button>
+                </a>
+              </div>`;
+                      data = htmlTempTop + components + htmlTempBottom;
+                      fs.writeFile("src/index.html", data, (err) => {});
+                      console.log(answers);
+                    });
+                } else {
+                  data = htmlTempTop + components + htmlTempBottom;
+                  fs.writeFile("src/index.html", data, (err) => {});
+                  console.log(answers);
+                }
+              });
+          }
         });
+    } else {
+      data = htmlTempTop + components + htmlTempBottom;
+      fs.writeFile("src/index.html", data, (err) => {});
     }
   });
